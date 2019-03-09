@@ -1,13 +1,10 @@
-{ pkgs ? import <nixpkgs> { } }:
+# We've pinned Haskell LTS 12.12 commit of nixpkgs for reproducible builds.
 
-# We've pinned version 18.03 of nixpkgs for reproducible builds.
-
-# See this link for a tutorial:
-# https://github.com/Gabriel439/haskell-nix/tree/master/project0
-
-import (pkgs.fetchFromGitHub {
-  owner  = "NixOS";
-  repo   = "nixpkgs";
-  rev    = "18.03";
-  sha256 = "0hk4y2vkgm1qadpsm4b0q1vxq889jhxzjx3ragybrlwwg54mzp4f";
-}) { }
+import (builtins.fetchTarball {
+  # Descriptive name to make the store path easier to identify
+  name = "nixos-unstable-2017-09-12";
+  # Commit hash for nixos-unstable as of 2019-09-12
+  url = https://github.com/nixos/nixpkgs/archive/6ec4ebf6f87fdfc221103f41a0353aa7c0a21684.tar.gz;
+  # Hash obtained using `nix-prefetch-url --unpack <url>`
+  sha256 = "1wa54b3qnm2dcphy1qyqv68fckcbrjsaxd9dp69ilhmrjnpydrn8";
+}) {}
